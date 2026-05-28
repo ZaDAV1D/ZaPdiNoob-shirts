@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZaPdiNoob™ Luxury</title>
+
+<link rel="icon" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Rubik',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:#050505;color:white;overflow-x:hidden;}
+
+/* INTRO */
+#intro{
+position:fixed;
+inset:0;
+background:#050505;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:99999;
+animation:fadeOut 1s ease forwards;
+animation-delay:2.5s;
+}
+
+#intro img{
+width:220px;
+height:220px;
+object-fit:contain;
+animation:zoomIn 1.2s ease;
+filter:drop-shadow(0 0 25px rgba(255,255,255,0.2));
+}
+
+#intro p{
+opacity:0.6;
+margin-top:10px;
+animation:fadeIn 1.5s ease;
+}
+
+@keyframes zoomIn{
+from{transform:scale(0.6);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:0.6;}
+}
+
+@keyframes fadeOut{
+0%{opacity:1;}
+80%{opacity:1;}
+100%{opacity:0;visibility:hidden;}
+}
+
+/* HEADER */
+header{
+position:fixed;
+top:0;
+width:100%;
+z-index:1000;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.nav{
+max-width:1500px;
+margin:auto;
+padding:20px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo img{
+width:40px;
+height:40px;
+object-fit:contain;
+}
+
+.logo span{
+font-size:2rem;
+font-weight:900;
+}
+
+.nav-links{display:flex;gap:25px;}
+.nav-links a{color:white;text-decoration:none;opacity:0.7;}
+.nav-links a:hover{opacity:1;}
+
+.cart-btn{
+background:white;
+color:black;
+padding:12px 18px;
+border-radius:14px;
+font-weight:800;
+cursor:pointer;
+}
+
+/* HERO */
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:140px 20px;
+}
+
+.hero h1{
+font-size:6rem;
+font-weight:900;
+background:linear-gradient(90deg,#fff,#999,#fff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{opacity:0.7;max-width:700px;line-height:1.8;}
+
+section{padding:100px 25px;}
+
+.section-title{
+font-size:3rem;
+text-align:center;
+margin-bottom:60px;
+font-weight:900;
+}
+
+/* PRODUCTS */
+.products{
+max-width:1400px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.card{
+background:#111;
+border-radius:25px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,0.08);
+transition:0.6s;
+opacity:0;
+transform:translateY(40px);
+}
+
+.card.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.card:hover{transform:translateY(-8px);}
+
+.card img{
+width:100%;
+height:380px;
+object-fit:cover;
+}
+
+.card-content{padding:20px;}
+
+.price{font-size:1.4rem;font-weight:900;margin:10px 0;}
+
+.buy-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:white;
+color:black;
+font-weight:900;
+cursor:pointer;
+transition:transform 0.15s ease;
+}
+
+.buy-btn:active{
+transform:scale(0.92);
+}
+
+/* CART */
+.cart-popup,.checkout{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.85);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.box{
+background:#0f0f0f;
+padding:30px;
+border-radius:25px;
+width:90%;
+max-width:600px;
+}
+
+button{cursor:pointer;}
+
+/* LIVE */
+.live{
+position:fixed;
+top:120px;
+left:20px;
+background:#111;
+padding:12px 18px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+<img src="logo.png">
+<p>Luxury Streetwear Drop</p>
+</div>
+
+<header>
+<div class="nav">
+
+<div class="logo">
+<img src="logo.png">
+<span>ZaPdiNoob™</span>
+</div>
+
+<div class="nav-links">
+<a href="#shop">Shop</a>
+<a href="#drop">Drop</a>
+</div>
+
+<div class="cart-btn" onclick="openCart()">🛒 (<span id="cartCount">0</span>)</div>
+
+</div>
+</header>
+
+<div class="live">👀 <span id="viewers">4200</span> צופים עכשיו</div>
+
+<!-- HERO -->
+<section class="hero">
+<h1>ZaPdiNoob</h1>
+<p>מותג streetwear ייחודי עם עיצובים מודרניים ודרופים מוגבלים.</p>
+</section>
+
+<!-- DROP -->
+<section id="drop">
+<h2 class="section-title">🔥 Next Drop</h2>
+
+<div style="max-width:900px;margin:auto;background:#111;padding:30px;border-radius:25px;text-align:center;border:1px solid rgba(255,255,255,0.1);">
+
+<h3 style="font-size:2rem;font-weight:900;">DROP #01 - LIMITED</h3>
+
+<p style="opacity:0.7;margin:10px 0;">
+נשארו פריטים בודדים בלבד — לא חוזר שוב.
+</p>
+
+<div style="font-size:2rem;margin:20px 0;font-weight:900;">
+⏳ 02:14:33
+</div>
+
+</div>
+</section>
+
+<!-- SHOP -->
+<section id="shop">
+<h2 class="section-title">קולקציה מלאה</h2>
+
+<div class="products">
+
+<div class="card"><img src="gambel.png"><div class="card-content"><h3>חולצת הימורים</h3><div class="price">₪777</div><button class="buy-btn" onclick="addToCart('חולצת הימורים')">הוסף לעגלה</button></div></div>
+
+<div class="card"><img src="fet.png"><div class="card-content"><h3>FET Main Shirt</h3><div class="price">₪1299</div><button class="buy-btn" onclick="addToCart('FET Main Shirt')">הוסף לעגלה</button></div></div>
+
+<div class="card"><img src="ronenggshirt.png"><div class="card-content"><h3>Ronen GG Shirt</h3><div class="price">₪999</div><button class="buy-btn" onclick="addToCart('Ronen GG Shirt')">הוסף לעגלה</button></div></div>
+
+<div class="card"><img src="randomshirt.png"><div class="card-content"><h3>Random ZaP Tee</h3><div class="price">₪599</div><button class="buy-btn" onclick="addToCart('Random ZaP Tee')">הוסף לעגלה</button></div></div>
+
+<div class="card"><img src="shirt1.png"><div class="card-content"><h3>ZaP Elite Tee</h3><div class="price">₪799</div><button class="buy-btn" onclick="addToCart('ZaP Elite Tee')">הוסף לעגלה</button></div></div>
+
+<div class="card"><img src="shirt2.png"><div class="card-content"><h3>Noob Luxury Fit</h3><div class="price">₪999</div><button class="buy-btn" onclick="addToCart('Noob Luxury Fit')">הוסף לעגלה</button></div></div>
+
+<div class="card"><img src="shirt3.png"><div class="card-content"><h3>Glitch Designer</h3><div class="price">₪1499</div><button class="buy-btn" onclick="addToCart('Glitch Designer')">הוסף לעגלה</button></div></div>
+
+</div>
+</section>
+
+<!-- CART -->
+<div class="cart-popup" id="cartPopup">
+<div class="box">
+<h2>עגלה</h2>
+<div id="cartItems"></div>
+<button onclick="openCheckout()">להזמנה</button>
+<button onclick="closeCart()">סגור</button>
+</div>
+</div>
+
+<!-- ORDER -->
+<div class="checkout" id="checkout">
+<div class="box">
+
+<h2>🛒 ביצוע הזמנה</h2>
+
+<input id="name" placeholder="שם מלא"
+style="width:100%;margin:8px 0;padding:12px;border-radius:10px;border:none;">
+
+<input id="email" placeholder="אימייל"
+style="width:100%;margin:8px 0;padding:12px;border-radius:10px;border:none;">
+
+<button onclick="placeOrder()" style="
+width:100%;
+padding:14px;
+background:white;
+border:none;
+border-radius:12px;
+font-weight:900;
+cursor:pointer;
+margin-top:10px;
+">
+בצע הזמנה
+</button>
+
+<button onclick="closeCheckout()" style="
+margin-top:10px;
+width:100%;
+padding:12px;
+border-radius:12px;
+cursor:pointer;
+">
+סגור
+</button>
+
+<p id="orderMsg" style="margin-top:10px;color:lightgreen;display:none;">
+✔ ההזמנה התקבלה בהצלחה!
+</p>
+
+</div>
+</div>
+
+<script>
+let cart=[];
+
+function addToCart(item){
+cart.push(item);
+document.getElementById('cartCount').innerText=cart.length;
+}
+
+function openCart(){
+document.getElementById('cartPopup').style.display='flex';
+
+let html="";
+cart.forEach(i=>{
+html+=`<div style="padding:10px;background:#222;margin:8px 0;border-radius:10px;">${i}</div>`;
+});
+
+document.getElementById('cartItems').innerHTML=html || "העגלה ריקה";
+}
+
+function closeCart(){
+document.getElementById('cartPopup').style.display='none';
+}
+
+function openCheckout(){
+document.getElementById('checkout').style.display='flex';
+}
+
+function closeCheckout(){
+document.getElementById('checkout').style.display='none';
+}
+
+function placeOrder(){
+const name=document.getElementById("name").value;
+const email=document.getElementById("email").value;
+
+if(!name || !email){
+alert("יש למלא שם ואימייל");
+return;
+}
+
+document.getElementById("orderMsg").style.display="block";
+
+setTimeout(()=>{
+alert("ההזמנה נשלחה");
+closeCheckout();
+},1500);
+}
+
+function revealCards(){
+document.querySelectorAll(".card").forEach(card=>{
+const rect=card.getBoundingClientRect();
+if(rect.top < window.innerHeight-100){
+card.classList.add("show");
+}
+});
+}
+
+window.addEventListener("scroll",revealCards);
+window.addEventListener("load",revealCards);
+
+setInterval(()=>{
+document.getElementById("viewers").innerText=
+Math.floor(Math.random()*3000)+2500;
+},3000);
+</script>
+
+</body>
+</html>
